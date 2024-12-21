@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Registration Page</title>
+</head>
+<body>
+    <div class="header">
+        <h1> Eye on the Pies</h1>
+    </div>
+    
+    <div class="main_body">
+    <div class="reg">
+
+        <h1>Registration</h1>
+
+        <form action="register" method="post">
+            {% csrf_token %}
+
+            <label for="first_name">First Name: </label>
+            <input type="text" name="first_name"><br><br>
+
+            <label for="last_name">Last Name: </label>
+            <input type="text" name="last_name"><br><br>
+
+            <label for="email">Email: </label>
+            <input type="email" name="email"><br><br>
+
+            <label for="password">password: </label>
+            <input type="password" name="password"><br><br>
+
+            <label for="confirm_password">Comfirm Password: </label>
+            <input type="password" name="confirm_password"><br><br>
+
+            <button type="submit" class="btn btn-info">Register</button>
+        </form>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                {% if "add_error" in message.tags %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% else %}
+        <li>Baker Created Successfully !</li>
+        {% endif %}
+
+    </div>
+
+    <div class="login">
+
+        <h1>Login</h1>
+
+        <form action="login" method="post" value>
+            {% csrf_token %}
+            <label for="login_email">Email: </label>
+            <input type="email" name="login_email"><br><br>
+
+            <label for="login_password">password: </label>
+            <input type="password" name="login_password"><br><br>
+            <button type="submit" class="btn btn-info">Login</button>
+        </form>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                {% if "login_error" in message.tags %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    </div>
+</div>
+</body>
+
+<style>
+
+
+.header{
+    margin: 50px ;
+    text-align: center;
+    font-style: italic;
+}
+
+    li{
+        color: red;
+        font-weight: bold;
+    }
+    h1 {
+        margin-bottom: 50px;
+    }
+
+    .login {
+        margin-left: 100px;
+    }
+
+    .main_body {
+        margin: 2%;
+        display: flex;
+        justify-content: center;
+    }
+
+    label {
+        width: 100px;
+
+    }
+
+    input {
+
+        padding-right: 50px;
+    }
+</style>
+
+</html>
